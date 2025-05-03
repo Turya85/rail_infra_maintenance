@@ -22,7 +22,7 @@ st.title(TITLE)
 # -------------------------------------------------
 SAMPLE_PATH = "railway_infra_component_data_with_zone.csv"  # bundled demo
 st.sidebar.header("Upload CSV")
-file = st.sidebar.file_uploader("railway_infra_component_data_with_zone.csv", type=["csv"])
+file = st.sidebar.file_uploader("railway_infra_component_data.csv", type=["csv"])
 
 if file:
     df_raw = pd.read_csv(file)
