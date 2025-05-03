@@ -20,7 +20,7 @@ st.title(TITLE)
 # -------------------------------------------------
 # SIDEBAR – DATA SOURCE
 # -------------------------------------------------
-SAMPLE_PATH = "railway_infra_component_data_with_zone.csv"  # bundled demo
+SAMPLE_PATH = "railway_infra_component_data.csv"  # bundled demo
 st.sidebar.header("Upload CSV")
 file = st.sidebar.file_uploader("railway_infra_component_data.csv", type=["csv"])
 
