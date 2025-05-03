@@ -1,0 +1,14 @@
+# Streamlit app framework
+streamlit
+
+# Data wrangling & analysis
+pandas
+numpy
+scikit-learn
+
+# Visualisation
+matplotlib
+seaborn
+
+# Excel export used by pandas.ExcelWriter
+xlsxwriter
