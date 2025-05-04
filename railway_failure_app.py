@@ -128,20 +128,20 @@ def build_recommendations(data: pd.DataFrame):
     # Top 3 failing components
     top_comps = (data.groupby("Component")["Failed"].mean()
                    .sort_values(ascending=False).head(3).index.tolist())
-    suggestions.append(f"**🔧 Components with highest failure rate:** {', '.join(top_comps)}."
+    suggestions.append(f"** Components with highest failure rate:** {', '.join(top_comps)}."
                        " Prioritise enhanced inspections or accelerated replacement schedules.")
 
     # Zone with highest failure rate
     worst_zone, worst_rate = (data.groupby("Zone")["Failed"].mean()
                                .sort_values(ascending=False).iloc[[0]].items().__next__())
-    suggestions.append(f"**🌍 Under‑performing zone:** {worst_zone} ({worst_rate*100:.1f}% failures)."
+    suggestions.append(f"** Under‑performing zone:** {worst_zone} ({worst_rate*100:.1f}% failures)."
                        " Investigate environmental and process factors affecting reliability.")
 
     # Age threshold cue
     age_bins = pd.cut(data["Age_Years"], bins=[0,5,10,12,15,20])
     age_fr = data.groupby(age_bins)["Failed"].mean()
     critical_bin = age_fr.idxmax()
-    suggestions.append(f"**⏳ Age vs failure:** components older than **{critical_bin.right:.0f} years**"
+    suggestions.append(f"** Age vs failure:** components older than **{critical_bin.right:.0f} years**"
                        " show a sharp uptick in risk. Consider preventive refurbishment at this age.")
 
     return suggestions
