@@ -131,7 +131,7 @@ def build_recommendations(data: pd.DataFrame):
     return suggestions
 
 st.markdown("---")
-st.subheader("📌 Recommendations")
+st.subheader("Recommendations")
 for rec in build_recommendations(df):
     st.markdown(f"- {rec}")
 
