@@ -87,23 +87,7 @@ fig7, ax7 = plt.subplots(figsize=(10,6)); sns.heatmap(df.select_dtypes("number")
 st.markdown("---")
 
 # -------------------------------------------------
-# 5️⃣  FEATURE IMPORTANCE (Random Forest) – optional context
-# -------------------------------------------------
-@st.cache_data(show_spinner=False)
-def feature_importance(df):
-    cat_cols = ["Component", "Zone", "Category", "Failure_Mode"]
-    enc = pd.get_dummies(df, columns=cat_cols, drop_first=True)
-    X = enc.drop(["Risk_Score", "Failed"], axis=1)
-    y = enc["Failed"]
-    trX, teX, trY, teY = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
-    rf = RandomForestClassifier(n_estimators=200, random_state=42, n_jobs=-1).fit(trX, trY)
-    return pd.Series(rf.feature_importances_, index=X.columns).sort_values(ascending=False)[:10]
-
-imp = feature_importance(df)
-fig8, ax8 = plt.subplots(figsize=(6,4)); imp[::-1].plot.barh(ax=ax8, color="seagreen"); ax8.set_xlabel("Importance"); ax8.set_title("Top 10 feature importances"); st.pyplot(fig8)
-
-# -------------------------------------------------
-# 6️⃣  SUMMARY TABLE & DOWNLOAD
+# 5  SUMMARY TABLE & DOWNLOAD
 # -------------------------------------------------
 summary = (df.pivot_table(index="Zone", columns="Component", values="Failed", aggfunc="mean")*100).round(1)
 st.subheader("Failure rate (%) by zone & component")
@@ -120,7 +104,7 @@ def to_excel_bytes(data):
 st.download_button("📊 Download Excel report", data=to_excel_bytes(df), file_name="railway_failure_analysis.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 # -------------------------------------------------
-# 7️⃣  AUTO‑GENERATED RECOMMENDATIONS
+# 6  AUTO‑GENERATED RECOMMENDATIONS
 # -------------------------------------------------
 
 def build_recommendations(data: pd.DataFrame):
